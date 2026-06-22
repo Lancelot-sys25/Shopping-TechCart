@@ -1,0 +1,6 @@
+.vs/
+shoppingTechCart/bin/
+shoppingTechCart/obj/
+*.user
+*.suo
+shoppingTechCart/appsettings.json
