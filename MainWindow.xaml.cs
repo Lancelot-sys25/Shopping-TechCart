@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using shoppingTechCart.Entities;
 using System.Text;
 using System.Windows;
@@ -133,16 +133,35 @@ namespace shoppingTechCart
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if(dgProducts.SelectedItem is Product product)
+            if (dgProducts.SelectedItem is Product product)
             {
+                // Check if product is in any orders to prevent foreign key errors
+                bool hasHistory = _db.OrderDetails.Any(od => od.ProductId == product.ProductId);
+                if (hasHistory)
+                {
+                    MessageBox.Show("Cannot delete this product because it has purchase history in orders.", "Delete Blocked", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
                 var result = MessageBox.Show("Do you want to delete? ", "DELETE",
                    MessageBoxButton.YesNo, MessageBoxImage.Question);
                
-                if(result == MessageBoxResult.Yes)
+                if (result == MessageBoxResult.Yes)
                 {
-                    _db.Products.Remove(product);
-                    _db.SaveChanges();
-                    LoadProduct();
+                    try
+                    {
+                        // Also remove associated cart items if any, to avoid FK issues there
+                        var relatedCartItems = _db.CartItems.Where(c => c.ProductId == product.ProductId);
+                        _db.CartItems.RemoveRange(relatedCartItems);
+
+                        _db.Products.Remove(product);
+                        _db.SaveChanges();
+                        LoadProduct();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error deleting product: " + ex.GetBaseException().Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
         }

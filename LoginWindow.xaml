@@ -1,28 +1,52 @@
 <Window x:Class="shoppingTechCart.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Login" Height="350" Width="360"
-        WindowStartupLocation="CenterScreen">
-    <StackPanel Margin="24">
-        <TextBlock Text="Login"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   Margin="0,0,0,16"/>
+        Title="TechCart - Secure Login" Height="410" Width="400"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#0B0F19">
+    <Grid>
+        <Border Margin="24" 
+                Background="{StaticResource CardBrush}" 
+                BorderBrush="{StaticResource BorderBrush}" 
+                BorderThickness="1" 
+                CornerRadius="12">
+            <StackPanel Margin="24">
+                <TextBlock Text="TECHCART PORTAL"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource AccentBrush}"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,4"/>
+                <TextBlock Text="Secure Login Access"
+                           FontSize="13"
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
 
-        <Label Content="Account"/>
-        <TextBox x:Name="txtAccount"
-                 Margin="0,0,0,8"/>
+                <Label Content="Account / Username"/>
+                <TextBox x:Name="txtAccount"
+                         Height="36"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,12"/>
 
-        <Label Content="Password"/>
-        <PasswordBox x:Name="txtPassword"
-                     Margin="0,0,0,16"/>
+                <Label Content="Password"/>
+                <PasswordBox x:Name="txtPassword"
+                             Height="36"
+                             VerticalContentAlignment="Center"
+                             Margin="0,0,0,20"/>
 
-        <Button Content="Login"
-                Height="32"
-                Click="btnLogin_Click"/>
-        <Button Content="Register"
-                Height="32" 
-                Margin="0,8,0,0"
-                Click="btnOpenRegister_Click"/>
-    </StackPanel>
+                <Button Content="LOGIN"
+                        Height="36"
+                        Style="{StaticResource AccentGradientButton}"
+                        Click="btnLogin_Click"/>
+                
+                <Button Content="Create New Account"
+                        Height="36" 
+                        Margin="0,8,0,0"
+                        Style="{StaticResource SecondaryButton}"
+                        Click="btnOpenRegister_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
 </Window>

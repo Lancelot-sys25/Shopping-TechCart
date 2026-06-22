@@ -1,36 +1,64 @@
 <Window x:Class="shoppingTechCart.RegisterWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Register" Height="430" Width="380"
-        WindowStartupLocation="CenterScreen">
-    <StackPanel Margin="24">
-        <TextBlock Text="Register"
-                   FontSize="24" 
-                   FontWeight="Bold"
-                   Margin="0,0,0,16"/>
+        Title="TechCart - Create Account" Height="580" Width="440"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#0B0F19">
+    <Grid>
+        <Border Margin="24" 
+                Background="{StaticResource CardBrush}" 
+                BorderBrush="{StaticResource BorderBrush}" 
+                BorderThickness="1" 
+                CornerRadius="12">
+            <StackPanel Margin="24">
+                <TextBlock Text="CREATE ACCOUNT"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="{StaticResource AccentBrush}"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,4"/>
+                <TextBlock Text="Join the TechCart shopping platform"
+                           FontSize="13"
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
 
-        <Label Content="Account"/>
-        <TextBox x:Name="txtAccount"
-                 Margin="0,0,0,8"/>
+                <Label Content="Account / Username"/>
+                <TextBox x:Name="txtAccount"
+                         Height="34"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,8"/>
 
-        <Label Content="Password"/>
-        <PasswordBox x:Name="txtPassword"
-                     Margin="0,0,0,8"/>
+                <Label Content="Password"/>
+                <PasswordBox x:Name="txtPassword"
+                             Height="34"
+                             VerticalContentAlignment="Center"
+                             Margin="0,0,0,8"/>
 
-        <Label Content="First name"/>
-        <TextBox x:Name="txtFirstName"
-                 Margin="0,0,0,8"/>
+                <Label Content="First name"/>
+                <TextBox x:Name="txtFirstName"
+                         Height="34"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,8"/>
 
-        <Label Content="Last name"/>
-        <TextBox x:Name="txtLastName" 
-                 Margin="0,0,0,8"/>
+                <Label Content="Last name"/>
+                <TextBox x:Name="txtLastName" 
+                         Height="34"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,8"/>
 
-        <Label Content="Phone"/>
-        <TextBox x:Name="txtPhone" 
-                 Margin="0,0,0,16"/>
+                <Label Content="Phone number"/>
+                <TextBox x:Name="txtPhone" 
+                         Height="34"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,16"/>
 
-        <Button Content="Create account"
-                Height="32"
-                Click="btnRegister_Click"/>
-    </StackPanel>
+                <Button Content="SIGN UP"
+                        Height="36"
+                        Style="{StaticResource AccentGradientButton}"
+                        Click="btnRegister_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
 </Window>

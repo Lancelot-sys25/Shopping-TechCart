@@ -1,4 +1,5 @@
 using shoppingTechCart.Entities;
+using shoppingTechCart.Services;
 using System.Windows;
 
 namespace shoppingTechCart
@@ -80,7 +81,7 @@ namespace shoppingTechCart
                 Account account = new Account()
                 {
                     Account1 = accountId,
-                    Pass = password,
+                    Pass = PasswordHasher.HashPassword(password),
                     FirstName = firstName,
                     LastName = lastName,
                     Phone = phone,

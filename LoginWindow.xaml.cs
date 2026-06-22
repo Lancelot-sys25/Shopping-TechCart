@@ -1,4 +1,5 @@
 using shoppingTechCart.Entities;
+using shoppingTechCart.Services;
 using System.Windows;
 
 namespace shoppingTechCart
@@ -14,9 +15,11 @@ namespace shoppingTechCart
         {
             using var db = new ProductIntroContext();
 
+            string hashedInput = PasswordHasher.HashPassword(txtPassword.Password);
+
             var account = db.Accounts.FirstOrDefault(a =>
                 a.Account1 == txtAccount.Text &&
-                a.Pass == txtPassword.Password &&
+                a.Pass == hashedInput &&
                 a.IsUse == true);
 
             if (account == null)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -77,7 +77,7 @@ public partial class ProductIntroContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("lastName");
             entity.Property(e => e.Pass)
-                .HasMaxLength(20)
+                .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("pass");
             entity.Property(e => e.Phone)
@@ -314,3 +314,4 @@ public partial class ProductIntroContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+
