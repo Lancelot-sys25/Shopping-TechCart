@@ -24,6 +24,9 @@ namespace shoppingTechCart
         public MainWindow(Account currentUser)
         {
             InitializeComponent();
+
+            
+
             _db = new();
             _currentUser = currentUser;
 

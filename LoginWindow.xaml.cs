@@ -9,6 +9,10 @@ namespace shoppingTechCart
         public LoginWindow()
         {
             InitializeComponent();
+            // Code tạm để lấy mật khẩu đã mã hóa (Ví dụ muốn đặt mật khẩu là: abc)
+            //string hashedPassword = Services.PasswordHasher.HashPassword("abc");
+            //System.Diagnostics.Debug.WriteLine($"=== HASHED PASSWORD: {hashedPassword}");
+            //System.Windows.MessageBox.Show(hashedPassword, "Copy chuỗi này nha bạn");
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -35,8 +39,10 @@ namespace shoppingTechCart
                 return;
             }
 
-            //phân quyền 
-            if (account.RoleInSystem == 1)
+            //if (password != account.Pass) // So sánh trực tiếp chữ thường
+
+                //phân quyền 
+                if (account.RoleInSystem == 1)
             {
                 MainWindow mainWindow = new MainWindow(account);
                 mainWindow.Show();
