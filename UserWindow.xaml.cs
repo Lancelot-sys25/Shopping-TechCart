@@ -74,6 +74,11 @@ namespace shoppingTechCart
             }
         }
 
+        private void btnOpenProfile_Click(object sender, RoutedEventArgs e)
+        {
+            mainTabControl.SelectedIndex = 1;
+        }
+
         private void btnSaveProfile_Click(object sender, RoutedEventArgs e)
         {
             string firstName = txtFirstName.Text.Trim();

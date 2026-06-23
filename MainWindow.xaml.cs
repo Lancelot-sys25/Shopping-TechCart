@@ -67,9 +67,37 @@ namespace shoppingTechCart
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtName.Text))
+            string productId = txtId.Text.Trim();
+            string productName = txtName.Text.Trim();
+            string unit = string.IsNullOrWhiteSpace(txtUnit.Text) ? "pcs" : txtUnit.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(productId))
+            {
+                MessageBox.Show("Please enter product ID");
+                return;
+            }
+
+            if (productId.Length > 10)
+            {
+                MessageBox.Show("Product ID must be less than or equal to 10 characters");
+                return;
+            }
+
+            if (_db.Products.Any(p => p.ProductId == productId))
+            {
+                MessageBox.Show("Product ID already exists");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(productName))
             {
                 MessageBox.Show("Please enter product name");
+                return;
+            }
+
+            if (productName.Length > 500)
+            {
+                MessageBox.Show("Product name must be less than or equal to 500 characters");
                 return;
             }
 
@@ -79,9 +107,28 @@ namespace shoppingTechCart
                 return;
             }
 
-            if (!int.TryParse(txtDiscount.Text, out int discount))
+            if (price < 0)
+            {
+                MessageBox.Show("Price must be greater than or equal to 0");
+                return;
+            }
+
+            int discount = 0;
+            if (!string.IsNullOrWhiteSpace(txtDiscount.Text) && !int.TryParse(txtDiscount.Text, out discount))
             {
                 MessageBox.Show("Discount must be a number");
+                return;
+            }
+
+            if (discount < 0)
+            {
+                MessageBox.Show("Discount must be greater than or equal to 0");
+                return;
+            }
+
+            if (unit.Length > 32)
+            {
+                MessageBox.Show("Unit must be less than or equal to 32 characters");
                 return;
             }
 
@@ -90,14 +137,14 @@ namespace shoppingTechCart
                 MessageBox.Show("Please select category");
                 return;
             }
+
             Product product = new Product()
             {
-
-                ProductId = txtId.Text,
-                ProductName = txtName.Text,
-                Price = int.Parse(txtPrice.Text),
-                Discount = int.Parse(txtDiscount.Text),
-                Unit = txtUnit.Text,
+                ProductId = productId,
+                ProductName = productName,
+                Price = price,
+                Discount = discount,
+                Unit = unit,
                 TypeId = (int)(cbxType.SelectedValue),
                 Account = _currentUser.Account1,
                 PostedDate = DateTime.Now
@@ -107,9 +154,18 @@ namespace shoppingTechCart
                 MessageBoxButton.YesNo, MessageBoxImage.Question);
             if(result == MessageBoxResult.Yes)
             {
-                _db.Products.Add(product);
-                _db.SaveChanges();
-                LoadProduct();
+                try
+                {
+                    _db.Products.Add(product);
+                    _db.SaveChanges();
+                    LoadProduct();
+                    dgProducts.SelectedItem = product;
+                    MessageBox.Show("Product added successfully!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error adding product: " + ex.GetBaseException().Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

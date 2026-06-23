@@ -49,6 +49,16 @@
             </Setter>
         </Style>
 
+        <Style x:Key="HiddenTabItem" TargetType="TabItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border Width="0" Height="0"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- Custom ListBoxItem Style for Product Cards -->
         <Style TargetType="ListBoxItem">
             <Setter Property="Background" Value="Transparent"/>
@@ -95,6 +105,7 @@
                 <Button x:Name="btnToggleCart" 
                         HorizontalAlignment="Right" 
                         VerticalAlignment="Center"
+                        Margin="0,0,120,0"
                         Padding="12,6"
                         Style="{StaticResource SecondaryButton}"
                         Click="btnToggleCart_Click">
@@ -102,11 +113,19 @@
                         <TextBlock Text="🛒 View Cart" FontWeight="Bold"/>
                     </StackPanel>
                 </Button>
+                <Button x:Name="btnOpenProfile"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Padding="12,6"
+                        Style="{StaticResource SecondaryButton}"
+                        Click="btnOpenProfile_Click">
+                    <TextBlock Text="My Profile" FontWeight="Bold"/>
+                </Button>
             </Grid>
         </Border>
 
         <!-- Main Body TabControl -->
-        <TabControl Grid.Row="1" Background="Transparent" BorderThickness="0">
+        <TabControl x:Name="mainTabControl" Grid.Row="1" Background="Transparent" BorderThickness="0">
             <!-- Tab 1: Shopping Center -->
             <TabItem Header="SHOPPING CENTER" Style="{StaticResource ModernTabItem}">
                 <Grid Margin="0,12,0,0">
@@ -310,7 +329,7 @@
             </TabItem>
 
             <!-- Tab 2: User Profile Management -->
-            <TabItem Header="MY PROFILE" Style="{StaticResource ModernTabItem}">
+            <TabItem Header="MY PROFILE" Style="{StaticResource HiddenTabItem}">
                 <Grid Margin="0,12,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
