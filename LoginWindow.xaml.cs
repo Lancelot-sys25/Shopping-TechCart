@@ -15,14 +15,21 @@ namespace shoppingTechCart
         {
             using var db = new ProductIntroContext();
 
-            string hashedInput = PasswordHasher.HashPassword(txtPassword.Password);
+            // normalize input (trim) to avoid accidental spaces
+            string accountId = txtAccount.Text?.Trim() ?? string.Empty;
+            string password = txtPassword.Password?.Trim() ?? string.Empty;
 
-            var account = db.Accounts.FirstOrDefault(a =>
-                a.Account1 == txtAccount.Text &&
-                a.Pass == hashedInput &&
-                a.IsUse == true);
+            // find account by id first (only active accounts)
+            var account = db.Accounts.FirstOrDefault(a => a.Account1 == accountId && a.IsUse == true);
 
             if (account == null)
+            {
+                MessageBox.Show("Wrong account or password");
+                return;
+            }
+
+            // verify hashed password
+            if (!Services.PasswordHasher.VerifyPassword(password, account.Pass))
             {
                 MessageBox.Show("Wrong account or password");
                 return;
